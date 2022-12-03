@@ -1,0 +1,153 @@
+*{
+	box-sizing: border-box; 
+	margin: 0;
+	padding: 0;
+}
+body{
+    background-color: #9933cc;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5%;
+    background-color: #fff;
+    height: 80px;
+}
+.profilenav{
+    border: 2px solid #9933cc;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 15px;
+    display:inline-block;
+    position: relative;
+}
+.profilenav:hover .logout{
+    display:flex;
+}
+.logout{
+    border: 2px solid #9933cc;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 15px;
+    background-color: #fff;
+    display:none;
+    z-index: 999;
+    position: absolute;
+    top: 63px;
+    right: auto;
+    width: auto;
+}
+.logo{
+    cursor: pointer;
+}
+.Pseudo{
+    float: right;
+    margin: 15px;
+}
+.avatar{
+    float: left;
+}
+.side-bar{
+    float: left;
+    width: 18%;
+    background-color: #ffffff99;
+    margin: 1%;
+    height: 84vh;
+    border-radius: 5px;
+}
+.disp{
+    float: right;
+    width: 78%;
+    margin: 1%;
+    height: 84vh;
+    background-color: #ffffff99;
+    border-radius: 5px;
+}
+nav button{
+    height: 50px;
+    width: 80%;
+    border-radius: 5px;
+    margin: 15px 10%;
+}
+nav ul{
+    list-style: none;
+    text-align: center;
+}
+nav ul li{
+    display: block;
+    padding: 20px 0;
+}
+
+nav ul li a {
+    transition: all 0.3s ease 0s;
+}
+nav ul li a:hover {
+    color: #9933cc77;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+.topbar {
+    background-color: #ffffff99;
+    height: 40px;
+    border-radius: 5px;
+    width: 98.4%;
+    margin: 0.8%;
+}
+.btn{
+    border-radius: 5px;
+    position: relative;
+    height: 80%;
+    margin: 3px;
+    background-color: #ffffff99;
+}
+.main {
+    display: block;
+    position: relative;
+    padding-left: 45px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+input[type=checkbox] {
+    visibility: hidden;
+}
+.radiobtn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: black;
+}
+.main:hover input ~ .radiobtn {
+    background-color: yellow;
+}
+.main input:active ~ .radiobtn {
+    background-color: red;
+}
+.main input:checked ~ .radiobtn {
+    background-color: green;
+}
+.radiobtn:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.main input:checked ~ .radiobtn:after {
+    display: block;
+}
+.main .radiobtn:after {
+    left: 8px;
+    bottom: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

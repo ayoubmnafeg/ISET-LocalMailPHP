@@ -1,0 +1,56 @@
+*{
+	box-sizing: border-box; 
+	margin: 0;
+	padding: 0;
+}
+body{
+    background-color: #9933cc;
+}
+form {
+    background-color: #ffffff99;
+    width: 60vw;
+    height: 70vh;
+    margin: 5% 20%;
+    border: #fff;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+.bottombar{
+    background-color: #ffffff99;
+    width:calc(100%-10px);
+    height: 45px;
+    position: relative;
+    border-radius: 5px;
+}
+.btn{
+    border-radius: 5px;
+    position: relative;
+    height: 90%;
+    margin: 3px;
+    background-color: #ffffff99;
+}
+.send{
+    background-color: #9933cc99;
+    width: 10%;
+    border: none;
+}
+.chank{
+    border-radius: 5px;
+    height: 5vh;
+    width: 100%;
+    margin: 3px;
+    border: none;
+    padding: 0 20px;
+    background-color: #ffffff99;
+}
+.msg{
+    border-radius: 5px;
+    margin: 3px;
+    padding: 5px 20px;
+    border: none;
+    height: 35vh;
+    width: 100%;
+    resize: none;
+    background-color: #ffffff99;
+}
