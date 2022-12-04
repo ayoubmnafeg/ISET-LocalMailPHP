@@ -74,13 +74,12 @@
         if($result->num_rows == 0) {
             echo "<span>no E-mail resived</span>";
         } else {
-            $emails = $result->fetch_all(MYSQLI_ASSOC); 
-            foreach($emails as $key => $value){
+            $emails = $result->fetch_all(MYSQLI_ASSOC);
+            foreach ($emails as $key => $value) {
                 $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate']);
                 echo $mail;
             }
         }
-        
         ?>
     </div>
 </body>

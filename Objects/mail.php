@@ -16,6 +16,23 @@ class mail{
         $this->obj = $obj;
         $this->msg = $msg;
         $this->timedate=$timedate;
+        $this->res = array();
+        $this->cc = array();
+        $this->cci = array();
+        $this->pjt = array();
+    }
+    
+    function addRes($res){
+        array_push($this->res,$res);
+    }
+    function addCc($cc){
+        array_push($this->cc,$cc);
+    }
+    function addCci($cci){
+        array_push($this->cci,$cci);
+    }
+    function addPjt($pjt){
+        array_push($this->pjt,$pjt);
     }
     function sendMail(){
         
