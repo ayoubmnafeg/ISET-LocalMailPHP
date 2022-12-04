@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php
+    include '../config/db_connnection.php';
+    include '../Objects/mail.php';
+    $conn = OpenCon();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,12 +45,43 @@
     <div class="disp">
         <div class="topbar">
             <label class="main">
-                <input type="checkbox" checked="checked">
+                <input type="checkbox">
                 <span class="radiobtn"></span>
             </label>
-            <input type="button" value="delete" class="btn">
+            <a class="delbtn" href="#"><img src="../images/trash-bin.png" alt="bin" id="delbtn" title="click to delete selected items"></a>
         </div>
-        <?php //echo $_SESSION['name'] ?>
+        <hr>
+        <!--div class="mail">
+            <label class="main">
+                <input type="checkbox">
+                <span class="radiobtn"></span>
+            </label>
+            <div>
+                <div class="nameMail">
+                    
+                </div>
+                <div class="objectMail">
+                    
+                </div>
+                <div class="timeMail">
+                    
+                </div>
+            </div>
+        </div-->
+        <?php
+        $Pseudo = $_SESSION['Pseudo'];
+        $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver  Where email='$Pseudo') ORDER BY timedate DESC");
+        if($result->num_rows == 0) {
+            echo "<span>no E-mail resived</span>";
+        } else {
+            $emails = $result->fetch_all(MYSQLI_ASSOC); 
+            foreach($emails as $key => $value){
+                $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate']);
+                echo $mail;
+            }
+        }
+        
+        ?>
     </div>
 </body>
 </html>

@@ -96,6 +96,7 @@ a{
     border-radius: 5px;
     width: 98.4%;
     margin: 0.8%;
+    display: inline-grid;
 }
 .btn{
     border-radius: 5px;
@@ -121,16 +122,17 @@ input[type=checkbox] {
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: black;
+    background-color: #ffffff77;
+    border-radius: 5px;
+    margin: 8px;
+    border: 1px black;
 }
 .main:hover input ~ .radiobtn {
-    background-color: yellow;
+    background-color: #ffffffaa;
 }
-.main input:active ~ .radiobtn {
-    background-color: red;
-}
+
 .main input:checked ~ .radiobtn {
-    background-color: green;
+    background-color: #9933cccc;
 }
 .radiobtn:after {
     content: "";
@@ -150,4 +152,49 @@ input[type=checkbox] {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+#delbtn{
+    height: 80%;
+    margin: 4px;
+}
+.delbtn{
+    position: relative;
+    top: -35px;
+    left: 45px;
+    height: 35px;
+    width: 35px;
+}
+.mail{
+    background-color: #ffffff99;
+    height: 40px;
+    border-radius: 5px;
+    width: 98.4%;
+    margin: 0.8%;
+}
+
+.nameMail{
+    position: relative;
+    top: -35px;
+    left: 45px;
+    height: 35px;
+    width: 20%;
+    text-align: center;
+    padding: 10px;
+}
+.objectMail{
+    position: relative;
+    top: -70px;
+    left: 30%;
+    height: 35px;
+    padding: 10px;
+    width: max-content;
+}
+.timeMail{
+    position: relative;
+    top: -105px;
+    height: 35px;
+    width: 12%;
+    text-align: center;
+    padding: 10px;
+    float: right;
 }

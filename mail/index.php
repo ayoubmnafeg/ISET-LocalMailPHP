@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-    <input type="button" class="btn back" value="<">
+    <a href="../reception/" class="backbtn" ><<a>
     <form name="f" method="post" action="send.php" enctype="multipart/form-data">
         <div>
             <input type="text" class="chank" name="res" placeholder="À">
