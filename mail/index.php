@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/mail.css">
+    <link rel="stylesheet" href="../style/mail.css">
     <title>Mail - <?php echo $_SESSION['Pseudo'] ?></title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
+    <input type="button" class="btn back" value="<">
     <form name="f" method="post" action="send.php" enctype="multipart/form-data">
         <div>
             <input type="text" class="chank" name="res" placeholder="À">
@@ -52,23 +53,23 @@
                     let file = e.target.files[i];
                     if(hasExtension(file.name, ['.jpg'])){
                         document.getElementById('filesicons').innerHTML += (
-                            '<img src="images/jpg.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
+                            '<img src="../images/jpg.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
                         );
                     }else if(hasExtension(file.name, ['.png'])){
                         document.getElementById('filesicons').innerHTML += (
-                            '<img src="images/png.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
+                            '<img src="../images/png.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
                         );
                     }else if(hasExtension(file.name, ['.csv'])){
                         document.getElementById('filesicons').innerHTML += (
-                            '<img src="images/csv.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
+                            '<img src="../images/csv.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
                         );
                     }else if(hasExtension(file.name, ['.zip', '.rar'])){
                         document.getElementById('filesicons').innerHTML += (
-                            '<img src="images/zip.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
+                            '<img src="../images/zip.png" alt="bin" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' style="float: right;height: 80%;margin: 4px;">'
                         );
                     }else{
                         document.getElementById('filesicons').innerHTML += (
-                            '<img src="images/new-document.png" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' alt="bin" style="float: right;height: 80%;margin: 4px;">'
+                            '<img src="../images/new-document.png" onclick="addBorder(this, ' + i + ')" id="' + i + '" title=' + file.name + ' alt="bin" style="float: right;height: 80%;margin: 4px;">'
                         );
                     }
                 }
@@ -76,7 +77,7 @@
             
             );
         }
-        function clearFileInput(ctrl) {
+        /*function clearFileInput(ctrl) {
             try {
                 ctrl.value = null;
             } catch(ex) { }
@@ -84,7 +85,7 @@
                 ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
             }
         }
-        /*function deleteFiles(){
+        function deleteFiles(){
             const dt = new DataTransfer()
             const input = document.getElementById('inpfile');
             const { files } = input;

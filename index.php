@@ -17,26 +17,26 @@
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 			<div class="signup">
-				<form method="post" onSubmit="return validate()" action="./access/SignIn.php" name="f">
+				<form method="post" action="./access/SignIn.php" name="f">
 					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="Pseudo" placeholder="Pseudo" required>
+					<input type="email" name="E-mail" placeholder="E-mail" required>
 					<input type="password" name="pswd" placeholder="Password" required>
 					<input type="submit" name="SubmitButton" value="Login"/>
 					<?php
-					if(isset($_GET['err'])){
+					if(isset($_GET['err'])) {
 						if ($_GET['err'] == "wrongpassword") 
-						echo "<center class=red>wrong password !</center>"; 
+						    echo "<center class=red>wrong password !</center>";
 						elseif ($_GET['err'] == "wrongemail") 
-						echo "<center class=red>wrong email !</center>"; 
+						    echo "<center class=red>wrong email !</center>";
 					}
 					?>
 				</form>
 			</div>
 			<div class="login">
-				<form method="post" action="./access/SignUp.php" name="f2">
+				<form method="post" onSubmit="return validate()" action="./access/SignUp.php" name="f2">
 					<label for="chk" aria-hidden="true">Sign up</label>
 					<input type="text" name="name" placeholder="name" required>
-					<input type="email" name="Pseudo" placeholder="Pseudo name" required>
+					<input type="email" name="E-mail" placeholder="E-mail" required>
 					<input type="password" id="password" name="pswd" placeholder="Password" required>
 					<input type="password" id="confirm_password" name="pswdcp" placeholder="confirm Password" required>
 					<input type="submit" name="SubmitButton" value="Sign up"/>

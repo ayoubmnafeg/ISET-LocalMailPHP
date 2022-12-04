@@ -17,7 +17,7 @@
             <p class="Pseudo"><?php echo $_SESSION['name']; ?></p>
             <a href="../access/logout.php">
                 <div class="logout">
-                    <img src="./images/logout.png" height="50" class="avatar" alt="logout icon">
+                    <img src="../images/logout.png" height="50" class="avatar" alt="logout icon">
                     <p class="Pseudo">Logout</p>
                 </div>
             </a>
@@ -25,7 +25,7 @@
     </header>
     <div class="side-bar">
         <nav>
-            <a href="../mail/index.php"><button>Ecrire</button></a>
+            <a href="../mail/"><button>Ecrire</button></a>
             <ul>
                 <li><a href="index.php">Boite reception</a></li>
                 <li><a href="nonlus.php">Non lus</a></li>
