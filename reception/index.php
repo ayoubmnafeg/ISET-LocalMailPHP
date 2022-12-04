@@ -36,9 +36,9 @@
             <a href="../mail/"><button>Ecrire</button></a>
             <ul>
                 <li><a href="index.php">Boite reception</a></li>
-                <li><a href="nonlus.php">Non lus</a></li>
-                <li><a href="envoyes.php">Envoyer</a></li>
-                <li><a href="corbeille.php">Corbeille</a></li>
+                <li><a href="index.php?page=unseen">Non lus</a></li>
+                <li><a href="index.php?page=envoyer">Envoyer</a></li>
+                <li><a href="index.php?page=corbeille">Corbeille</a></li>
             </ul>
         </nav>
     </div>
@@ -69,16 +69,53 @@
             </div>
         </div-->
         <?php
-        $Pseudo = $_SESSION['Pseudo'];
-        $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver  Where email='$Pseudo') ORDER BY timedate DESC");
-        if($result->num_rows == 0) {
-            echo "<span>no E-mail resived</span>";
-        } else {
-            $emails = $result->fetch_all(MYSQLI_ASSOC);
-            foreach ($emails as $key => $value) {
-                $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate'],$value['status']);
-                echo $mail;
-                
+        if (empty($_GET)) {
+            $Pseudo = $_SESSION['Pseudo'];
+            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver  Where email='$Pseudo') AND deleted='0' ORDER BY timedate DESC");
+            if($result->num_rows == 0) {
+                echo "<span style='margin: 10px;'>no E-mail resived</span>";
+            } else {
+                $emails = $result->fetch_all(MYSQLI_ASSOC);
+                foreach ($emails as $key => $value) {
+                    $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate'],$value['status']);
+                    echo $mail;
+                }
+            }
+        }else if($_GET['page']=='unseen'){
+            $Pseudo = $_SESSION['Pseudo'];
+            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver Where email='$Pseudo') AND status='unseen' AND deleted='0' ORDER BY timedate DESC");
+            if($result->num_rows == 0) {
+                echo "<span style='margin: 10px;'>no E-mail unseened</span>";
+            } else {
+                $emails = $result->fetch_all(MYSQLI_ASSOC);
+                foreach ($emails as $key => $value) {
+                    $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate'],$value['status']);
+                    echo $mail;
+                }
+            }
+        }else if($_GET['page']=='envoyer'){
+            $Pseudo = $_SESSION['Pseudo'];
+            $result = $conn->query("SELECT * FROM mails WHERE sender = '$Pseudo' AND deleted='0' ORDER BY timedate DESC");
+            if($result->num_rows == 0) {
+                echo "<span style='margin: 10px;'>no E-mail sended</span>";
+            } else {
+                $emails = $result->fetch_all(MYSQLI_ASSOC);
+                foreach ($emails as $key => $value) {
+                    $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate'],$value['status']);
+                    echo $mail;
+                }
+            }
+        }else if($_GET['page']=='corbeille'){
+            $Pseudo = $_SESSION['Pseudo'];
+            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver Where email='$Pseudo') AND deleted='1' ORDER BY timedate DESC");
+            if($result->num_rows == 0) {
+                echo "<span style='margin: 10px;'>no E-mail deleted</span>";
+            } else {
+                $emails = $result->fetch_all(MYSQLI_ASSOC);
+                foreach ($emails as $key => $value) {
+                    $mail = new mail($value['emailid'], $value['sender'], $value['object'], $value['message'], $value['timedate'],$value['status']);
+                    echo $mail;
+                }
             }
         }
         ?>

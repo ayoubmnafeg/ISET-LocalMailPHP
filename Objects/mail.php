@@ -75,7 +75,7 @@ class mail{
         </div>';
         if($this->status=='unseen'){
             $msg = $unseen;
-        }else{
+        }else if($this->status=='seen'){
             $msg = $seen;
         }
         return '
