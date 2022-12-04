@@ -36,9 +36,6 @@ class mail{
     function addPjt($pjt){
         array_push($this->pjt,$pjt);
     }
-    function sendMail(){
-        
-    }
     function __toString(){
         $timestamp = $this->timedate;
         $date = date("d.m.Y");

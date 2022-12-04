@@ -13,16 +13,16 @@
     <a href="../reception/" class="backbtn" ><<a>
     <form name="f" method="post" action="send.php" enctype="multipart/form-data">
         <div>
-            <input type="text" class="chank" name="res" placeholder="À">
+            <input type="text" class="chank" name="res" placeholder="À" required>
             <input type="text" class="chank" name="cc" placeholder="Cc">    
             <input type="text" class="chank" name="cci" placeholder="Cci">
-            <input type="text" class="chank" name="obj" placeholder="Object">
-            <textarea name="msg" class="msg"></textarea>
+            <input type="text" class="chank" name="obj" placeholder="Object" required>
+            <textarea name="msg" class="msg" required></textarea>
         </div>
         <div class="bottombar">
             <input type="submit" class="send btn" value="send">
             <label>
-                <input type="file" name="inpfile" style="display: none;"  id="inpfile" multiple/>
+                <input type="file" name="inpfile[]" style="display: none;"  id="inpfile" multiple/>
                 Add piece joint
             </label>
             <!--img src="images/trash-bin.png" alt="bin" id="delbtn" title="click to delete selected items" style="float: right;height: 80%;margin: 4px;"-->
