@@ -20,11 +20,15 @@ $result = $conn->query("INSERT INTO `mails` (`emailid`, `sender`, `object`, `mes
 foreach ($res as $key => $value) {
     $result = $conn->query("INSERT INTO `receiver` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
 }
-foreach ($cc as $key => $value) {
-    $result = $conn->query("INSERT INTO `cc` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
+if (count($cc) != 0) {
+    foreach ($cc as $key => $value) {
+        $result = $conn->query("INSERT INTO `cc` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
+    }
 }
-foreach ($cci as $key => $value) {
-    $result = $conn->query("INSERT INTO `cci` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
+if (count($cci) != 0) {
+    foreach ($cci as $key => $value) {
+        $result = $conn->query("INSERT INTO `cci` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
+    }
 }
 header("Location: ../reception/");
 ?>

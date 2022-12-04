@@ -9,13 +9,15 @@ class mail{
     private $msg;
     private $pjt;
     private $timedate;
+    private $status;
 
-    function __construct($emailid,$sen,$obj,$msg,$timedate){
+    function __construct($emailid,$sen,$obj,$msg,$timedate,$status){
         $this->emailid = $emailid;
         $this->sen = $sen;
         $this->obj = $obj;
         $this->msg = $msg;
         $this->timedate=$timedate;
+        $this->status = $status;
         $this->res = array();
         $this->cc = array();
         $this->cci = array();
@@ -47,23 +49,45 @@ class mail{
         }else{
             $dt = $dtime->format("d-m-Y");
         }
+        if(strlen($this->msg)>40){
+            $msg = substr($this->msg, 0, 40) . '...';
+        } else {
+            $msg = $this->msg;
+        }
+        $unseen = '<b>
+            <div class="nameMail">
+                '.$this->obj.'
+            </div>
+            <div class="objectMail">
+                '.$msg.'
+            </div>
+            <div class="timeMail">
+                '.$dt.'
+            </div>
+        </b>';
+        $seen = '<div>
+            <div class="nameMail">
+                '.$this->obj.'
+            </div>
+            <div class="objectMail">
+                '.$msg.'
+            </div>
+            <div class="timeMail">
+                '.$dt.'
+            </div>
+        </div>';
+        if($this->status=='unseen'){
+            $msg = $unseen;
+        }else{
+            $msg = $seen;
+        }
         return '
         <div class="mail">
             <label class="main">
                 <input type="checkbox">
                 <span class="radiobtn"></span>
             </label>
-            <div>
-                <div class="nameMail">
-                    '.$this->obj.'
-                </div>
-                <div class="objectMail">'.
-                    substr($this->msg, 0, 40)
-                .'</div>
-                <div class="timeMail">
-                    '.$dt.'
-                </div>
-            </div>
+            '.$msg.'
         </div>
         ';
     }
