@@ -13,8 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/reception3.css">
-    <link rel="stylesheet" href="../style/reception2.css">
+    <link rel="stylesheet" href="../style/reception.css">
     <title>reception - <?php echo $_SESSION['Pseudo'] ?></title>
 </head>
 <body>
@@ -71,7 +70,7 @@
         <?php
         if (empty($_GET)) {
             $Pseudo = $_SESSION['Pseudo'];
-            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver  Where email='$Pseudo') AND deleted='0' ORDER BY timedate DESC");
+            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver  Where email='$Pseudo' UNION select emailid FROM cc Where email='$Pseudo' UNION select emailid FROM cci Where email='$Pseudo') AND deleted='0' ORDER BY timedate DESC");
             if($result->num_rows == 0) {
                 echo "<span style='margin: 10px;'>no E-mail resived</span>";
             } else {
@@ -81,9 +80,9 @@
                     echo $mail;
                 }
             }
-        }else if($_GET['page']=='unseen'){
+        }else if($_GET['page'] == 'unseen'){
             $Pseudo = $_SESSION['Pseudo'];
-            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver Where email='$Pseudo') AND status='unseen' AND deleted='0' ORDER BY timedate DESC");
+            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver Where email='$Pseudo' UNION select emailid FROM cc Where email='$Pseudo' UNION select emailid FROM cci Where email='$Pseudo') AND status='unseen' AND deleted='0' ORDER BY timedate DESC");
             if($result->num_rows == 0) {
                 echo "<span style='margin: 10px;'>no E-mail unseened</span>";
             } else {
@@ -93,7 +92,7 @@
                     echo $mail;
                 }
             }
-        }else if($_GET['page']=='envoyer'){
+        }else if($_GET['page'] == 'envoyer'){
             $Pseudo = $_SESSION['Pseudo'];
             $result = $conn->query("SELECT * FROM mails WHERE sender = '$Pseudo' AND deleted='0' ORDER BY timedate DESC");
             if($result->num_rows == 0) {
@@ -105,9 +104,9 @@
                     echo $mail;
                 }
             }
-        }else if($_GET['page']=='corbeille'){
+        }else if($_GET['page'] == 'corbeille'){
             $Pseudo = $_SESSION['Pseudo'];
-            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver Where email='$Pseudo') AND deleted='1' ORDER BY timedate DESC");
+            $result = $conn->query("SELECT * FROM mails WHERE emailid in (select emailid FROM receiver Where email='$Pseudo' UNION select emailid FROM cc Where email='$Pseudo' UNION select emailid FROM cci Where email='$Pseudo') AND deleted='1' ORDER BY timedate DESC");
             if($result->num_rows == 0) {
                 echo "<span style='margin: 10px;'>no E-mail deleted</span>";
             } else {
@@ -117,6 +116,30 @@
                     echo $mail;
                 }
             }
+        } else if ($_GET['page'] == 'mail') {
+            $res = $conn->query("UPDATE `mails` SET `status` = 'seen' WHERE `mails`.`emailid` = ".$_GET['mail'].";");
+            $mail = $conn->query("SELECT * FROM `mails` WHERE `mails`.`emailid` = ".$_GET['mail'].";")->fetch_all(MYSQLI_ASSOC)[0];
+
+            $temparr = array();
+            $receiver = $conn->query("SELECT email FROM `receiver` WHERE `receiver`.`emailid` = " . $_GET['mail'] . ";")->fetch_all(MYSQLI_ASSOC);
+            foreach($receiver as $key => $value){
+                array_push($temparr, $value['email']);
+            }$receiver = implode(", ", $temparr);
+
+            $temparr = array();
+            $cc = $conn->query("SELECT email FROM `cc` WHERE `cc`.`emailid` = " . $_GET['mail'] . ";")->fetch_all(MYSQLI_ASSOC);
+            foreach($cc as $key => $value){
+                array_push($temparr, $value['email']);
+            }$cc = implode(", ", $temparr);
+
+            echo '<div class="mailCard">'.
+            'from:      '.$mail['sender'].'<br>'.
+            'to:        '.$receiver.'<br>'.
+            'cc:        '.$cc.'<br>'.
+            'date:      '.$mail['timedate'].'<br>'.
+            'subject:   '.$mail['object'].'<br>'
+            .'</div>';
+            echo '<div class="mailContent">message:<br><br>'.$mail['message'].'</div>';
         }
         ?>
     </div>

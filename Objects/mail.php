@@ -36,6 +36,7 @@ class mail{
     function addPjt($pjt){
         array_push($this->pjt,$pjt);
     }
+
     function __toString(){
         $timestamp = $this->timedate;
         $date = date("d.m.Y");
@@ -78,14 +79,14 @@ class mail{
         }else if($this->status=='seen'){
             $msg = $seen;
         }
-        return '
+        return '<a href="../reception/index.php?page=mail&mail='.$this->emailid.'">
         <div class="mail">
             <label class="main">
                 <input type="checkbox">
                 <span class="radiobtn"></span>
             </label>
             '.$msg.'
-        </div>
+        </div></a>
         ';
     }
 

@@ -198,3 +198,18 @@ input[type=checkbox] {
     padding: 10px;
     float: right;
 }
+.mailCard{
+    background-color: #ffffff99;
+    border-radius: 5px;
+    width: 98.4%;
+    margin: 0.8%;
+    padding: 10px 15px;
+}
+.mailContent{
+    background-color: #ffffff99;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 98.4%;
+    height: auto;
+    margin: 0.8%;
+}

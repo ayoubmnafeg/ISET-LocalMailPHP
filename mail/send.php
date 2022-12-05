@@ -20,17 +20,14 @@ $result = $conn->query("INSERT INTO `mails` (`emailid`, `sender`, `object`, `mes
 foreach ($res as $key => $value) {
     $result = $conn->query("INSERT INTO `receiver` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
 }
-
-if(!$cc){
-    foreach ($cc as $key => $value) {
-        $result = $conn->query("INSERT INTO `cc` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
-    }
+foreach ($cc as $key => $value) {
+    $result = $conn->query("INSERT INTO `cc` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
 }
-if(!$cci){
-    foreach ($cci as $key => $value) {
-        $result = $conn->query("INSERT INTO `cci` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
-    }
+foreach ($cci as $key => $value) {
+    $result = $conn->query("INSERT INTO `cci` (`emailid`, `email`) VALUES ((select emailid from mails order by emailid DESC LIMIT 1), '$value')");
 }
+$conn->query("DELETE FROM `cci` WHERE `cci`.`email` = ''");
+$conn->query("DELETE FROM `cc` WHERE `cc`.`email` = ''");
 
 if (!empty(array_filter($_FILES['inpfile']['name']))) {
     $res = $conn->query("select emailid from mails order by emailid DESC LIMIT 1");
