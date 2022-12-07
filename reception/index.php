@@ -135,7 +135,7 @@
             $temparr = array();
             $url = $conn->query("SELECT * FROM `piece joint` WHERE `piece joint`.`emailid` = " . $_GET['mail'] . ";")->fetch_all(MYSQLI_ASSOC);
             foreach($url as $key => $value){
-                $file = '<a href="' . $value['url'] . '" download>'.$value['file name'].'<a>';
+                $file = '<a href="' . $value['url'] . '" download>'.$value['file name'].'<a><br>';
                 array_push($temparr, $file);
             }$url = implode("", $temparr);
 
