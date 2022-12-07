@@ -132,6 +132,13 @@
                 array_push($temparr, $value['email']);
             }$cc = implode(", ", $temparr);
 
+            $temparr = array();
+            $url = $conn->query("SELECT * FROM `piece joint` WHERE `piece joint`.`emailid` = " . $_GET['mail'] . ";")->fetch_all(MYSQLI_ASSOC);
+            foreach($url as $key => $value){
+                $file = '<a href="' . $value['url'] . '" download>'.$value['file name'].'<a>';
+                array_push($temparr, $file);
+            }$url = implode("", $temparr);
+
             echo '<div class="mailCard">'.
             'from:      '.$mail['sender'].'<br>'.
             'to:        '.$receiver.'<br>'.
@@ -139,7 +146,12 @@
             'date:      '.$mail['timedate'].'<br>'.
             'subject:   '.$mail['object'].'<br>'
             .'</div>';
-            echo '<div class="mailContent">message:<br><br>'.$mail['message'].'</div>';
+            echo '<div class="mailContent">message:<br><br>'.$mail['message'].'
+                <div>
+                    <br><hr><br>
+                    '.$url.'
+                </div>
+            </div>';
         }
         ?>
     </div>

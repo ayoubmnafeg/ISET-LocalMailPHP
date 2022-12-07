@@ -39,10 +39,10 @@ if (!empty(array_filter($_FILES['inpfile']['name']))) {
         $tempLocation = $_FILES['inpfile']['tmp_name'][$id];
         $targetFilePath = $uploadsDir . $fileName;
         if (move_uploaded_file($tempLocation, $targetFilePath)) {
-            $sqlVal = "('" .$emailid. "', '" . $targetFilePath . "')";
+            $sqlVal = "('" .$emailid. "', '" . $targetFilePath . "', '" .$fileName. "')";
         }
         if (!empty($sqlVal)) {
-            $insert = $conn->query("INSERT INTO `piece joint` (`emailid`, `url`) VALUES $sqlVal");
+            $insert = $conn->query("INSERT INTO `piece joint` (`emailid`, `url`, `file name`) VALUES $sqlVal");
         }
     }
 }
