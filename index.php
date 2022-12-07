@@ -25,9 +25,9 @@
 					<?php
 					if(isset($_GET['err'])) {
 						if ($_GET['err'] == "wrongpassword") 
-						    echo "<center class=red>wrong password !</center>";
+							echo "<center class=red>wrong password !</center>";
 						elseif ($_GET['err'] == "wrongemail") 
-						    echo "<center class=red>wrong email !</center>";
+							echo "<center class=red>wrong email !</center>";
 					}
 					?>
 				</form>
