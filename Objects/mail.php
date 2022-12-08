@@ -82,7 +82,7 @@ class mail{
         return '<a href="../reception/index.php?page=mail&mail='.$this->emailid.'">
         <div class="mail">
             <label class="main">
-                <input type="checkbox">
+                <input type="checkbox" class="checkmail" name="selected[]">
                 <span class="radiobtn"></span>
             </label>
             '.$msg.'

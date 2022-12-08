@@ -44,7 +44,7 @@
     <div class="disp">
         <div class="topbar">
             <label class="main">
-                <input type="checkbox">
+                <input type="checkbox" id="checkall" name="all">
                 <span class="radiobtn"></span>
             </label>
             <a class="delbtn" href="#"><img src="../images/trash-bin.png" alt="bin" id="delbtn" title="click to delete selected items"></a>
@@ -155,6 +155,21 @@
         }
         ?>
     </div>
+    <script src="../lib/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            var allCB = $('input[name="selected[]"]');
+            var mainCB = $('input[name="all"]')
+            mainCB.on('click', function () {
+                var status = $(this).is(':checked');
+                allCB.prop('checked', status);
+            });
+            allCB.on('change', function () {
+                var status = $('input[name="selected[]"]:checked').length === allCB.length;
+                $('input[name="all"]').prop('checked', status);
+            });
+        });
+    </script>
 </body>
 </html>
 
