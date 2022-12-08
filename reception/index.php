@@ -6,6 +6,31 @@
         die("Connection failed: " . $conn->connect_error);
     }
     session_start();
+        
+    function deletemail(){
+        $conn = OpenCon();
+        foreach($_POST['selected'] as $deleteid){
+            $conn->query("DELETE FROM mails WHERE `mails`.`emailid` = ".$deleteid.";");
+        }
+    }
+    function removemail(){
+        $conn = OpenCon();
+        foreach($_POST['selected'] as $deleteid){
+            $conn->query("UPDATE `mails` SET `deleted` = '1' WHERE `mails`.`emailid` = ".$deleteid.";");
+        }
+    }
+    function remdelmail()
+    {
+        if (empty($_GET) or $_GET['page'] == 'unseen' or $_GET['page'] == 'mail') {
+            removemail();
+        } else if ($_GET['page'] == 'envoyer' or $_GET['page'] == 'corbeille') {
+            deletemail();
+        }
+        //header("Refresh:0");
+    }
+    if (isset($_POST[''])) { // If it is the first time, it does nothing
+        remdelmail();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,13 +66,13 @@
             </ul>
         </nav>
     </div>
-    <div class="disp">
+    <form class="disp" method="post">
         <div class="topbar">
             <label class="main">
-                <input type="checkbox" id="checkall" name="all">
+                <input type="checkbox" name="all">
                 <span class="radiobtn"></span>
             </label>
-            <a class="delbtn" href="#"><img src="../images/trash-bin.png" alt="bin" id="delbtn" title="click to delete selected items"></a>
+            <!--input type="image" alt="Submit" src="../images/trash-bin.png" alt="bin" onclick="remdelmail()" class="delbtn" title="click to delete selected items"-->
         </div>
         <hr>
         <!--div class="mail">
@@ -140,11 +165,11 @@
             }$url = implode("", $temparr);
 
             echo '<div class="mailCard">'.
-            'from:      '.$mail['sender'].'<br>'.
-            'to:        '.$receiver.'<br>'.
-            'cc:        '.$cc.'<br>'.
-            'date:      '.$mail['timedate'].'<br>'.
-            'subject:   '.$mail['object'].'<br>'
+            'from: &nbsp;&nbsp;'.$mail['sender'].'<br>'.
+            'to: &nbsp;&nbsp;'.$receiver.'<br>'.
+            'cc: &nbsp;&nbsp;'.$cc.'<br>'.
+            'date: &nbsp;&nbsp;'.$mail['timedate'].'<br>'.
+            'subject: &nbsp;&nbsp;'.$mail['object'].'<br>'
             .'</div>';
             echo '<div class="mailContent">message:<br><br>'.$mail['message'].'
                 <div>
@@ -154,18 +179,18 @@
             </div>';
         }
         ?>
-    </div>
+    </form>
     <script src="../lib/jquery.js"></script>
     <script>
         $(document).ready(function () {
-            var allCB = $('input[name="selected[]"]');
+            var allCB = $('input[name="selected"]');
             var mainCB = $('input[name="all"]')
             mainCB.on('click', function () {
                 var status = $(this).is(':checked');
                 allCB.prop('checked', status);
             });
             allCB.on('change', function () {
-                var status = $('input[name="selected[]"]:checked').length === allCB.length;
+                var status = $('input[name="selected"]:checked').length === allCB.length;
                 $('input[name="all"]').prop('checked', status);
             });
         });

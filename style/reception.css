@@ -153,16 +153,13 @@ input[type=checkbox] {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-#delbtn{
-    height: 80%;
-    margin: 4px;
-}
 .delbtn{
     position: relative;
-    top: -35px;
+    top: -60px;
     left: 45px;
-    height: 35px;
     width: 35px;
+    height: 35px;
+    margin: 4px;
 }
 .mail{
     background-color: #ffffff99;
